@@ -16,7 +16,7 @@ public class ProdutoDAO {
     private Connection c;
     
     public ProdutoDAO() {
-        this.c = ConnectionFactory.getConnection("jdbc:mysql://localhost/farmacia", username, password);
+        this.c = ConnectionFactory.getConnection("jdbc:mysql://localhost/farmacia", "username", "password");
     }
     
 }
