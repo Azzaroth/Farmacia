@@ -5,7 +5,9 @@
  */
 package model.dao;
 
-import java.sql.Connection;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import model.entidades.Produto;
 
 /**
  *
@@ -13,10 +15,23 @@ import java.sql.Connection;
  */
 public class ProdutoDAO {
     
-    private Connection c;
+    EntityManagerFactory factory;
+    EntityManager manager;
     
     public ProdutoDAO() {
-        this.c = ConnectionFactory.getConnection("jdbc:mysql://localhost/farmacia", "username", "password");
+        this.factory = ConnectionFactory.getEntityManagerFactory();
+    }
+    
+    public void fechaFactory() {
+        factory.close();
+    }
+    
+    public void adicionarProduto(Produto p) {
+        manager = factory.createEntityManager();
+        manager.getTransaction().begin();
+        manager.persist(p);
+        manager.getTransaction().commit();
+        manager.close();
     }
     
 }
